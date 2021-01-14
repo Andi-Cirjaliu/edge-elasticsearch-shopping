@@ -1,0 +1,23 @@
+version: '3'
+services: 
+  etcd:
+    image: 'gcr.io/etcd-development/etcd:v3.4.14'
+    ports: 
+      - '4379:2379'
+      - '4380:2380'
+    volumes:
+      - type: bind
+        source: C:/tmp/etcd-data.tmp
+        target: /etcd-data
+  backend:
+    build: 
+      dockerfile: Dockerfile
+      context: .
+    # volumes: 
+    #   - /app/node_modules
+    #   - ./:/app
+    environment: 
+      - PORT=3000
+      - DB_HOST=etcd
+    ports: 
+      - '3000:3000'
