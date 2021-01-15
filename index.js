@@ -55,6 +55,6 @@ io.on('connection', socket => {
   console.log('----- Socket client connected! socket id ', socket.id);
 });
 
-( async () => {
-    await db.initDB();
-})();
+// ( async () => {
+//     await db.initDB();
+// })();

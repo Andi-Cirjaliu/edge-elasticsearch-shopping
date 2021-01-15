@@ -1,23 +1,21 @@
 version: '3'
 services: 
-  etcd:
-    image: 'gcr.io/etcd-development/etcd:v3.4.14'
+  elastic:
+    image: 'docker.elastic.co/elasticsearch/elasticsearch:7.10.1'
+    environment:
+      - discovery.type=single-node
     ports: 
-      - '4379:2379'
-      - '4380:2380'
-    volumes:
-      - type: bind
-        source: C:/tmp/etcd-data.tmp
-        target: /etcd-data
-  backend:
+      - '9200:9200'
+      - '9300:9300'
+  app:
     build: 
       dockerfile: Dockerfile
       context: .
-    # volumes: 
-    #   - /app/node_modules
-    #   - ./:/app
+    volumes: 
+      - /app/node_modules
+      - ./:/app
     environment: 
       - PORT=3000
-      - DB_HOST=etcd
+      - DB_HOST=http://elastic:9200
     ports: 
       - '3000:3000'

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elastic-search-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: elastic
+  template:
+    metadata:
+      labels:
+        component: elastic
+    spec:
+      containers:
+      - name: elastic
+        image: 'docker.elastic.co/elasticsearch/elasticsearch:7.10.1'
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+        ports:
+        - containerPort: 9200
+        - containerPort: 9300
+        env:
+          - name: 'discovery.type'
+            value: 'single-node'

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopping-elastic-app-deployment
+spec:
+  selector:
+    matchLabels:
+      component: shopping-elastic-app
+  template:
+    metadata:
+      labels:
+        component: shopping-elastic-app
+    spec:
+      containers:
+      - name: shopping-elastic-app
+        image: shopping_elastic:1.0
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
+        env:
+          - name: NODE_ENV
+            value: production
+          - name: PORT
+            value: '3000'
+          - name: DB_HOST
+            value: http://elastic-search-service:9200
