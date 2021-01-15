@@ -27,3 +27,13 @@ spec:
             value: '3000'
           - name: DB_HOST
             value: http://elastic-search-service:9200
+          - name: DB_SECURE
+            value: 'true'
+          - name: DB_USER
+            value: elastic
+          - name: DB_PASSWORD
+            # value: elastic1234
+            valueFrom:
+                secretKeyRef:
+                  name: elasticsearch-es-elastic-user
+                  key: elastic

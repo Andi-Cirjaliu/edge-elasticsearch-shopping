@@ -4,23 +4,39 @@ const SHOPPING_INDEX = 'shopping';
 
 const io = require('./socket');
 
-const host = process.env.DB_HOST;
-console.log('db host: ', host);
+const host = process.env.DB_HOST || 'http://localhost:9200';
+const secure = process.env.DB_SECURE || false;
+const user = process.env.DB_USER || 'elastic';
+const password = process.env.DB_PASSWORD || '';
+console.log('db host: ', host, ', secure: ', secure, ', user: ', user);
 
 let db_init = false;
 
-let client = new Client({ node: "http://localhost:9200" });
-if (host) {
-  console.log("Created an elastic search client for host ", host);
-  client = new Client({
-    node: host,
-    // maxRetries: 3,
-    // requestTimeout: 30000,
-    // sniffOnStart: true,
-  });
-} else {
-  console.log("Created an elastic search client for http://localhost:9200 ");
-} 
+let connectionInfo = {
+  node: host
+};
+
+if ( secure === 'true' ) {
+  connectionInfo.auth = {
+    username: user,
+    password: password
+  }
+}
+console.log('connection info: ', connectionInfo);
+console.log("Created an elastic search client for host ", host);
+
+const client = new Client(connectionInfo);
+// if (host) {
+//   console.log("Created an elastic search client for host ", host);
+//   client = new Client({
+//     node: host,
+//     // maxRetries: 3,
+//     // requestTimeout: 30000,
+//     // sniffOnStart: true,
+//   });
+// } else {
+//   console.log("Created an elastic search client for http://localhost:9200 ");
+// } 
 
 // client.ping(
 //   {
@@ -45,7 +61,7 @@ const getAllItems = async () => {
   if ( db_init === false ) {
     await initDB();
   }
-  
+
   console.log("get all items...");
 
   const { body } = await client.search(
