@@ -1,0 +1,16 @@
+apiVersion: skaffold/v2beta7
+kind: Config
+metadata:
+  name: elasticsearch-example
+build:
+  artifacts:
+  - image: shopping-elastic-app-deployment
+    context: .
+    sync:
+      manual:
+      - src: './*'
+        dest: /app/*
+deploy:
+  kubectl:
+    manifests:
+      - ./k8s/*
