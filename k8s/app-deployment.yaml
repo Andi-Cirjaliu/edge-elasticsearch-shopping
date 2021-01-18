@@ -26,10 +26,9 @@ spec:
           - name: PORT
             value: '3000'
           - name: DB_HOST
-            value: https://10.98.32.232:9200
-            # value: http://elasticsearch-es-http.operators.svc.cluster.local:9200
+            # value: https://10.98.32.232:9200
+            value: https://elasticsearch-es-http.operators.svc.cluster.local:9200
             # value: http://elasticsearch-es-default.operators.svc.cluster.local:9200
-            # value: http://elastic-search-service.operators.svc.cluster.local:9200
             # value: http://elastic-search-service:9200
           - name: DB_SECURE
             value: 'true'
