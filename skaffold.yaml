@@ -5,7 +5,7 @@ metadata:
 build:
   artifacts:
   - image: shopping-elastic-app-deployment
-    context: .
+    context: ./
     sync:
       manual:
       - src: './*'

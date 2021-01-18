@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: shopping-elastic-app
-        image: shopping_elastic:1.0
+        image: shopping-elastic-app-deployment:1.0
         resources:
           limits:
             memory: "128Mi"
