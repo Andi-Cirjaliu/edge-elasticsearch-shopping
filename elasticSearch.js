@@ -30,7 +30,7 @@ if ( useSSL === 'true' ){
     rejectUnauthorized: false
   }
 }
-console.log('connection info: ', connectionInfo);
+// console.log('connection info: ', connectionInfo);
 console.log("Created an elastic search client for host ", host);
 
 const client = new Client(connectionInfo);
