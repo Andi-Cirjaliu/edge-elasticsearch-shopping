@@ -8,7 +8,9 @@ const host = process.env.DB_HOST || 'http://localhost:9200';
 const secure = process.env.DB_SECURE || false;
 const user = process.env.DB_USER || 'elastic';
 const password = process.env.DB_PASSWORD || '';
-console.log('db host: ', host, ', secure: ', secure, ', user: ', user);
+const useSSL = process.env.DB_USE_SSL || false;
+const SSLCert = process.env.DB_SSL_CERT || '';
+console.log('db host: ', host, ', secure: ', secure, ', user: ', user, ', useSSL: ', useSSL, ', SSLCert: ', SSLCert);
 
 let db_init = false;
 
@@ -20,6 +22,12 @@ if ( secure === 'true' ) {
   connectionInfo.auth = {
     username: user,
     password: password
+  }
+}
+if ( useSSL === 'true' ){
+  connectionInfo.ssl = {
+    ca: SSLCert,
+    rejectUnauthorized: false
   }
 }
 console.log('connection info: ', connectionInfo);

@@ -41,3 +41,10 @@ spec:
                 secretKeyRef:
                   name: elasticsearch-es-elastic-user
                   key: elastic
+          - name: DB_USE_SSL
+            value: 'true'
+          - name: DB_SSL_CERT
+            valueFrom: 
+                secretKeyRef:
+                  name: elasticsearch-es-http-ca-internal
+                  key: tls.crt
