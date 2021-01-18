@@ -26,10 +26,12 @@ spec:
           - name: PORT
             value: '3000'
           - name: DB_HOST
-            # value: https://10.98.32.232:9200
-            value: https://elasticsearch-es-http.operators.svc.cluster.local:9200
-            # value: http://elasticsearch-es-default.operators.svc.cluster.local:9200
-            # value: http://elastic-search-service:9200
+            # This is when elastic search is deployed on a production cluster in the 'operators' namespace
+            # value: https://elasticsearch-es-http.operators.svc.cluster.local:9200
+            # This is when elastic search is deployed using the config files in the 'operators' namespace
+            # value: http://elastic-search-service.operators.svc.cluster.local:9200
+            # This is when elastic search is deployed using the config files in the same namespace
+            value: http://elastic-search-service:9200
           - name: DB_SECURE
             value: 'true'
           - name: DB_USER
@@ -42,6 +44,7 @@ spec:
                   key: elastic
           - name: DB_USE_SSL
             value: 'true'
+          # Set this environment variable only if DB_USE_SSL is true
           - name: DB_SSL_CERT
             valueFrom: 
                 secretKeyRef:

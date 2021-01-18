@@ -14,4 +14,5 @@ deploy:
   kubectl:
     manifests:
       - ./k8s/*
-      - ./k8s_elastic/*
+      # k8s_elastic contains the configuration files for deploying elastic search. comment next line if elastic search is already deployed
+      # - ./k8s_elastic/*

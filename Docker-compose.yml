@@ -17,8 +17,12 @@ services:
     environment: 
       - PORT=3000
       - DB_HOST=http://elastic:9200
-      - DB_SECURE=true
+      - DB_SECURE=false
+      # set DB_USER and DB_PASSWORD if DB_SECURE=true
       - DB_USER=elastic
       - DB_PASSWORD=elastic1234
+      - DB_USE_SSL=false
+      # set DB_SSL_CERT if DB_USE_SSL=true
+      - DB_SSL_CERT=./cacert.pem
     ports: 
       - '3000:3000'
